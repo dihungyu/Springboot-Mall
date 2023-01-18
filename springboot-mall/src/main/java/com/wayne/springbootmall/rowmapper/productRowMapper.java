@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import com.wayne.springbootmall.constant.ProductCategory;
 import com.wayne.springbootmall.model.Product;
 
 public class productRowMapper implements RowMapper<Product> {
@@ -15,7 +16,13 @@ public class productRowMapper implements RowMapper<Product> {
         Product product = new Product();
         product.setProductId(rs.getInt("productId"));
         product.setProductName(rs.getString("productName"));
-        product.setCategory(rs.getString("category"));
+
+        // String categoryStr = rs.getString("category");
+        // ProductCategory category = ProductCategory.valueOf(categoryStr);
+        // product.setCategory(category);
+        // 以上三行可以簡寫至下方這一行，功能一致
+        product.setCategory(ProductCategory.valueOf(rs.getString("category")));
+
         product.setImageUrl(rs.getString("imageUrl"));
         product.setPrice(rs.getInt("price"));
         product.setStock(rs.getInt("stock"));
